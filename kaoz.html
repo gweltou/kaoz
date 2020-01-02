@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Kaoz (prototip)</title>
+    
+    <link rel="stylesheet" type="text/css" href="kaoz.css">
+    
+    <script type="text/javascript" src="w3codecolor.js"></script> 
+    <script type="text/javascript" src="scripts.js"></script>
+  </head>
+  
+  <body onload="pageInit();">
+    <div id="kemennadennou">
+    </div>
+    
+    <form class="message-box" onsubmit="sendKemennadenn(this); return false;">
+      <div>
+          Pseudo
+          <input type="text" id="pseudo-input" name="p" value="">
+      </div>
+      <div>
+          Lar
+          <input type="text" id="kemennadenn-input" name="k">
+      </div>
+      <input type="submit" class="dialog-button" value="KAS">
+    </form>
+    
+    <div id="karta" style="display:none;">
+      <pre>
+      ______         ,-----.      ___    _      .-./`)     ____    ,---.   .--.              .-'''-.  
+     |    _ `''.   .'  .-,  '.  .'   |  | |     \ '_ .') .'  __ `. |    \  |  |   _         / _     \ 
+     | _ | ) _  \ / ,-.|  \ _ \ |   .'  | |    (_ (_) _)/   '  \  \|  ,  \ |  | _( )_      (`' )/`--' 
+     |( ''_'  ) |;  \  '_ /  | :.'  '_  | |      / .  \ |___|  /  ||  |\_ \|  |(_ o _)    (_ o _).    
+     | . (_) `. ||  _`,/ \ _/  |'   ( \.-.| ___  |-'`|     _.-`   ||  _( )_\  | (_,_)    /)(_,_). '.  
+     |(_    ._) ': (  '\_/ \   ;' (`. _` /||   | |   '  .'   _    || (_ o _)  |(/``\\._.'/.---.  \  : 
+     |  (_.\.' /  \ `"/  \  ) / | (_ (_) _)|   `-'  /   |  _( )_  ||  (_,_)\  |     `._.' \    `-'  | 
+     |       .'    '. \_/``".'   \ /  . \ / \      /    \ (_ o _) /|  |    |  |            \       /  
+     '-----'`        '-----'      ``-'`-''   `-..-'      '.(_,_).' '--'    '--'             `-...-'   
+  
+                                                                 .-'''-.                                              
+                                                                '   _    \                                      .---. 
+     .           __....__        _..._                  .     /   /` '.   \                        __....__     |   | 
+   .'|       .-''        '.    .'     '.              .'|    .   |     \  '                    .-''        '.   |   | 
+ .'  |      /     .-'"'-.  `. .   .-.   .           .'  |    |   '      |  '                  /     .-'"'-.  `. |   | 
+<    |     /     /_______\   \|  '   '  |          <    |    \    \     / /  __              /     /_______\   \|   | 
+ |   | ____|                 ||  |   |  |       _   |   | ____`.   ` ..' /.:--.'.  .--------.|                 ||   | 
+ |   | \ .'\    .------------'|  |   |  |     .' |  |   | \ .'   '-...-'`/ |   \ | |____    |\    .------------'|   | 
+ |   |/  .  \    '-.___...---.|  |   |  |    .   | /|   |/  .            `" __ | |     /   /  \    '-.___...---.|   | 
+ |    /\  \  `.            .' |  |   |  |  .'.'| |//|    /\  \            .'.''| |   .'   /    `.            .' |   | 
+ |   |  \  \   `''-..... -'   |  |   |  |.'.'.-'  / |   |  \  \          / /   | |_ /    /___    `''-..... -'   '---' 
+ '    \  \  \                 |  |   |  |.'   \_.'  '    \  \  \         \ \._,\ '/|         |                        
+'------'  '---'               '--'   '--'          '------'  '---'        `--'  `" |_________|                        
+
+
+                                                                           [[ http://www.patorjk.com/software/taag ]]</pre>
+      <p style="text-align: center;">
+       <button type="button" class="dialog-button" onclick="document.getElementById('karta').style.display='none';">A-du</button>
+      </p>
+    </div>
+    
+    <script>
+      
+    </script>
+  </body>
+</html>
