@@ -104,8 +104,8 @@
 .message-box {
     font-family: "Arial Black", Gadget, sans-serif;
     min-width: 300px;
-    max-width: 800px;
-    padding: 4px;
+    width: max-content;
+    padding: 6px;
     /*text-align: center;*/
     background-color: rgba(240, 200, 200, 0.82);
     position: fixed;
