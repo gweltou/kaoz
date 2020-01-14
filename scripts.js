@@ -7,14 +7,14 @@ ajax.responseType = 'document';
 
 ajax.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        /* KEMENNADENNOÙ RESEVET ! */
+        /* MESSAGES RECEIVED ! */
         /*console.log(this.responseText);*/
         
         if (this.responseXML) {
             messages = this.responseXML.getElementsByTagName("message");
             for (let i = messages.length-1; i >= 0; i--) {
                 /* childrens: id, type, message-container */
-                let new_message = messages[i].children[2];
+                let new_message = messages[i].children[4];
                 appendMessage(new_message, messages[i].children[1].textContent);
                 document.cookie = "last_id=" + messages[i].children[0].textContent;
             }

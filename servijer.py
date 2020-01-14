@@ -20,6 +20,8 @@ KEMENNADENN = """
   <message>
     <id>{}</id>
     <type>{}</type>
+    <time>{}</time>
+    <host>{}</host>
     <div class="message-container" style="background-color:hsl({}, 60%, 96%);">
       <div class="pseudo-container">
         <div class="pseudo" style="color:hsl({}, 68%, 60%);background-color:hsl({}, 60%, 88%);">{}</div>
@@ -39,26 +41,28 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         host = self.client_address[0] + ':' + str(self.client_address[1])
     
-        # Lenn ar cookie
+        # Read cookies
         cookies = SimpleCookie(self.headers.get('Cookie'))
-        print(cookies)
+        if cookies:
+            print(cookies)
         if "last_id" in cookies:
             last_id = cookies["last_id"].value
         else:
             last_id = ""
         
+        # Parse query string
         query_dict = {}
         if self.path.find('?') > 0:
             path, query = self.path.split("?")
             query_dict = parse_qs(query)
             print(query_dict)
             if "p" in query_dict and "k" in query_dict:
-                # Kemennadenn resevet
+                # New message received
                 pseudo = query_dict["p"][0][:32]   # 32 chars max
                 pseudo_lower = pseudo.lower()
                 message = query_dict["k"][0]
                 if host not in users or users[host]["pseudo"] != pseudo:
-                    # Deraouiñ an implijer nevez ha dibab ul liv evitañ
+                    # User unknown, store new user
                     b = hash(pseudo_lower).to_bytes(8, byteorder='big', signed='signed')
                     s = sum(b)
                     hue = s%360
@@ -73,16 +77,16 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
                 # refuse client if too short
                 now = datetime.now()
                 if (now-users[host]["last_message"]).total_seconds() > MESSAGE_INTERVAL:
-                    # Asantiñ ar c'hemennadenn hag enrollañ anezhi
+                    # Accept and store message
                     users[host]["last_message"] = now
                     #users[host]["num_messages"] += 1
-                    print("RECORD " + message)
-                    # ID, IP, deiziat, type, pseudo, kemennadenn
+                    print("Message:", message)
+                    # ID, "IP:port", deiziat, type, pseudo, kemennadenn
                     content_type = "text"
                     if ('<' in message) and ('>' in message):
                         content_type = "html"
                     messages.insert(0,
-                        (str(uuid1()), "", now.isoformat(), content_type, pseudo, message))
+                        (str(uuid1()), host, now.isoformat(), content_type, pseudo, message))
         
         else:
             path = self.path
@@ -106,14 +110,18 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
                 if id == last_id:
                     # Don't send older messages than last_id
                     break
-                    
+                
+                hostname = m[1]
+                isotime = m[2]
                 content_type = m[3]
                 pseudo = m[4]
                 message = m[5]
-                hue = users[host]["hue"]   
+                hue = users[hostname]["hue"]   
                 xmldoc += KEMENNADENN.format(
                     id,
                     content_type,
+                    isotime,
+                    hostname,
                     hue,
                     hue,
                     (hue+180)%360,
