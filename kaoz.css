@@ -4,9 +4,11 @@
 
 .message-container {
     border-radius:      14px;
+    padding-right:      12px;
     margin:             8px;
     display:            flex;
     animation: slidein 0.3s;
+    width: max-content;
 }
 
 .pseudo-container {
